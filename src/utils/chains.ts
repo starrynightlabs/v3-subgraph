@@ -10,13 +10,14 @@ export enum ChainId {
   BLAST_MAINNET = 81457,
   BSC = 56,
   CELO = 42220,
-  MAINNET = 1,
+  MAINNET = 80085,
   MATIC = 137,
   OPTIMISM = 10,
   ZKSYNC_ERA = 324,
 }
 
 // subgraph does not support string enums, hence these constants
+const BERA_BARTIO_NETWORK_NAME = 'bera-bartio'
 const ARBITRUM_ONE_NETWORK_NAME = 'arbitrum-one'
 const AVALANCHE_NETWORK_NAME = 'avalanche'
 const BASE_NETWORK_NAME = 'base'
@@ -75,6 +76,27 @@ export function getSubgraphConfig(): SubgraphConfig {
   const selectedNetwork = dataSource.network()
 
   // subgraph does not support case switch with strings, hence this if else block
+  if (selectedNetwork == MAINNET_NETWORK_NAME) {
+    return {
+      factoryAddress: '0xC26efd9dE31b581cCC4CA50aeeaF05dE70B230D7',
+      stablecoinWrappedNativePoolAddress: '',
+      stablecoinIsToken0: false,
+      wrappedNativeAddress: '0x7507c1dc16935B82698e4C63f2746A2fCf994dF8',
+      minimumNativeLocked: BigDecimal.fromString('0'),
+      stablecoinAddresses: [],
+      whitelistTokens: [],
+      tokenOverrides: [
+        {
+          address: Address.fromString('0xC26efd9dE31b581cCC4CA50aeeaF05dE70B230D7'),
+          symbol: 'WETH',
+          name: 'Wrapped Ethereum',
+          decimals: BigInt.fromI32(18),
+        },
+      ],
+      poolsToSkip: [],
+      poolMappings: [],
+    }
+  }
   if (selectedNetwork == ARBITRUM_ONE_NETWORK_NAME) {
     return {
       factoryAddress: '0x1F98431c8aD98523631AE4a59f267346ea31F984',

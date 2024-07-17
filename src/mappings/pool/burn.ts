@@ -8,8 +8,12 @@ import { ONE_BI } from '../../utils/constants'
 import {
   updatePoolDayData,
   updatePoolHourData,
+  updateToken15MinuteData,
+  updateToken30MinuteData,
+  updateToken4HourData,
   updateTokenDayData,
   updateTokenHourData,
+  updateTokenMinuteData,
   updateUniswapDayData,
 } from '../../utils/intervalUpdates'
 
@@ -101,6 +105,14 @@ export function handleBurnHelper(event: BurnEvent, subgraphConfig: SubgraphConfi
     updateTokenDayData(token1 as Token, event)
     updateTokenHourData(token0 as Token, event)
     updateTokenHourData(token1 as Token, event)
+    updateTokenMinuteData(token0 as Token, event)
+    updateTokenMinuteData(token1 as Token, event)
+    updateToken15MinuteData(token0 as Token, event)
+    updateToken15MinuteData(token1 as Token, event)
+    updateToken30MinuteData(token0 as Token, event)
+    updateToken30MinuteData(token1 as Token, event)
+    updateToken4HourData(token0 as Token, event)
+    updateToken4HourData(token1 as Token, event)
 
     token0.save()
     token1.save()
