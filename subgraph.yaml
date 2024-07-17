@@ -36,6 +36,26 @@ dataSources:
       eventHandlers:
         - event: PoolCreated(indexed address,indexed address,indexed uint24,int24,address)
           handler: handlePoolCreated
+  - kind: ethereum/contract
+    name: PresaleManager
+    network: mainnet
+    source:
+      address: '0xfF70482c6A3AD9998DF0F886a6f636872F63dFf3'
+      abi: PresaleManager
+      startBlock: 1551485
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/presaleManager.ts
+      entities:
+        - Presale
+      abis:
+        - name: PresaleManager
+          file: ./abis/PresaleManager.json
+      eventHandlers:
+        - event: PresaleCreated(string,string,address,address,address,uint256,uint256,uint256,string)
+          handler: handlePresaleCreated
 templates:
   - kind: ethereum/contract
     name: Pool

@@ -620,3 +620,21 @@ type Token4HourData @entity {
   # close price USD
   close: BigDecimal!
 }
+
+# ------- Presale -------
+
+type Presale @entity {
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  data: String!
+  id: ID!
+  name: String!
+  pairAddress: String!
+  paymentToken: String!
+  saleAmount: BigInt!
+  presaleAmount: BigInt!
+  symbol: String!
+  token: String!
+  totalSupply: BigInt!
+  transactionHash: String!
+}
