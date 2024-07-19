@@ -6,8 +6,12 @@ import { convertTokenToDecimal, loadTransaction, safeDiv } from '../../utils'
 import { getSubgraphConfig, SubgraphConfig } from '../../utils/chains'
 import { ONE_BI, ZERO_BD } from '../../utils/constants'
 import {
+  updatePool15MinuteData,
+  updatePool30MinuteData,
+  updatePool4HourData,
   updatePoolDayData,
   updatePoolHourData,
+  updatePoolMinuteData,
   updateToken15MinuteData,
   updateToken30MinuteData,
   updateToken4HourData,
@@ -22,6 +26,7 @@ import {
   getTrackedAmountUSD,
   sqrtPriceX96ToTokenPrices,
 } from '../../utils/pricing'
+import { handleSwapForBalance } from '../holder/token'
 
 export function handleSwap(event: SwapEvent): void {
   handleSwapHelper(event)
@@ -183,6 +188,10 @@ export function handleSwapHelper(event: SwapEvent, subgraphConfig: SubgraphConfi
     const uniswapDayData = updateUniswapDayData(event, factoryAddress)
     const poolDayData = updatePoolDayData(event)
     const poolHourData = updatePoolHourData(event)
+    const poolMinuteData = updatePoolMinuteData(event)
+    const pool15MinuteData = updatePool15MinuteData(event)
+    const pool30MinuteData = updatePool30MinuteData(event)
+    const pool4HourData = updatePool4HourData(event)
     const token0DayData = updateTokenDayData(token0 as Token, event)
     const token1DayData = updateTokenDayData(token1 as Token, event)
     const token0HourData = updateTokenHourData(token0 as Token, event)
@@ -210,6 +219,26 @@ export function handleSwapHelper(event: SwapEvent, subgraphConfig: SubgraphConfi
     poolHourData.volumeToken0 = poolHourData.volumeToken0.plus(amount0Abs)
     poolHourData.volumeToken1 = poolHourData.volumeToken1.plus(amount1Abs)
     poolHourData.feesUSD = poolHourData.feesUSD.plus(feesUSD)
+
+    poolMinuteData.volumeUSD = poolMinuteData.volumeUSD.plus(amountTotalUSDTracked)
+    poolMinuteData.volumeToken0 = poolMinuteData.volumeToken0.plus(amount0Abs)
+    poolMinuteData.volumeToken1 = poolMinuteData.volumeToken1.plus(amount1Abs)
+    poolMinuteData.feesUSD = poolMinuteData.feesUSD.plus(feesUSD)
+
+    pool15MinuteData.volumeUSD = pool15MinuteData.volumeUSD.plus(amountTotalUSDTracked)
+    pool15MinuteData.volumeToken0 = pool15MinuteData.volumeToken0.plus(amount0Abs)
+    pool15MinuteData.volumeToken1 = pool15MinuteData.volumeToken1.plus(amount1Abs)
+    pool15MinuteData.feesUSD = pool15MinuteData.feesUSD.plus(feesUSD)
+
+    pool30MinuteData.volumeUSD = pool30MinuteData.volumeUSD.plus(amountTotalUSDTracked)
+    pool30MinuteData.volumeToken0 = pool30MinuteData.volumeToken0.plus(amount0Abs)
+    pool30MinuteData.volumeToken1 = pool30MinuteData.volumeToken1.plus(amount1Abs)
+    pool30MinuteData.feesUSD = pool30MinuteData.feesUSD.plus(feesUSD)
+
+    pool4HourData.volumeUSD = pool4HourData.volumeUSD.plus(amountTotalUSDTracked)
+    pool4HourData.volumeToken0 = pool4HourData.volumeToken0.plus(amount0Abs)
+    pool4HourData.volumeToken1 = pool4HourData.volumeToken1.plus(amount1Abs)
+    pool4HourData.feesUSD = pool4HourData.feesUSD.plus(feesUSD)
 
     token0DayData.volume = token0DayData.volume.plus(amount0Abs)
     token0DayData.volumeUSD = token0DayData.volumeUSD.plus(amountTotalUSDTracked)
@@ -286,5 +315,7 @@ export function handleSwapHelper(event: SwapEvent, subgraphConfig: SubgraphConfi
     pool.save()
     token0.save()
     token1.save()
+
+    handleSwapForBalance(event)
   }
 }

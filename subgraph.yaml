@@ -13,7 +13,7 @@ dataSources:
     source:
       address: '0xC26efd9dE31b581cCC4CA50aeeaF05dE70B230D7'
       abi: Factory
-      startBlock: 1551485
+      startBlock: 1559636
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -42,7 +42,7 @@ dataSources:
     source:
       address: '0xfF70482c6A3AD9998DF0F886a6f636872F63dFf3'
       abi: PresaleManager
-      startBlock: 1551485
+      startBlock: 1559636
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.7
@@ -90,3 +90,21 @@ templates:
         - event: Collect(indexed address,address,indexed int24,indexed
             int24,uint128,uint128)
           handler: handleCollect
+  - name: StandardToken
+    kind: ethereum/contract
+    network: mainnet
+    source:
+      abi: ERC20
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      file: ./src/mappings/holder/token.ts
+      entities:
+        - TransferEvent
+      abis:
+        - name: ERC20
+          file: ./abis/ERC20.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,uint256)
+          handler: handleTransfer

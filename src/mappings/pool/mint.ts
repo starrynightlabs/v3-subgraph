@@ -6,8 +6,12 @@ import { convertTokenToDecimal, loadTransaction } from '../../utils'
 import { getSubgraphConfig, SubgraphConfig } from '../../utils/chains'
 import { ONE_BI } from '../../utils/constants'
 import {
+  updatePool15MinuteData,
+  updatePool30MinuteData,
+  updatePool4HourData,
   updatePoolDayData,
   updatePoolHourData,
+  updatePoolMinuteData,
   updateToken15MinuteData,
   updateToken30MinuteData,
   updateToken4HourData,
@@ -132,6 +136,10 @@ export function handleMintHelper(event: MintEvent, subgraphConfig: SubgraphConfi
     updateUniswapDayData(event, factoryAddress)
     updatePoolDayData(event)
     updatePoolHourData(event)
+    updatePoolMinuteData(event)
+    updatePool15MinuteData(event)
+    updatePool30MinuteData(event)
+    updatePool4HourData(event)
     updateTokenDayData(token0 as Token, event)
     updateTokenDayData(token1 as Token, event)
     updateTokenHourData(token0 as Token, event)

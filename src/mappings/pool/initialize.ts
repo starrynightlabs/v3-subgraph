@@ -3,7 +3,14 @@ import { BigInt } from '@graphprotocol/graph-ts'
 import { Bundle, Pool, Token } from '../../types/schema'
 import { Initialize } from '../../types/templates/Pool/Pool'
 import { getSubgraphConfig, SubgraphConfig } from '../../utils/chains'
-import { updatePoolDayData, updatePoolHourData } from '../../utils/intervalUpdates'
+import {
+  updatePool15MinuteData,
+  updatePool30MinuteData,
+  updatePool4HourData,
+  updatePoolDayData,
+  updatePoolHourData,
+  updatePoolMinuteData,
+} from '../../utils/intervalUpdates'
 import { findNativePerToken, getNativePriceInUSD } from '../../utils/pricing'
 
 export function handleInitialize(event: Initialize): void {
@@ -34,6 +41,10 @@ export function handleInitializeHelper(event: Initialize, subgraphConfig: Subgra
 
   updatePoolDayData(event)
   updatePoolHourData(event)
+  updatePoolMinuteData(event)
+  updatePool15MinuteData(event)
+  updatePool30MinuteData(event)
+  updatePool4HourData(event)
 
   // update token prices
   if (token0 && token1) {

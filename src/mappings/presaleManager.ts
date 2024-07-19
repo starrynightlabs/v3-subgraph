@@ -24,6 +24,7 @@ export function handlePresaleCreatedHelper(event: PresaleCreated): void {
     presale.token = event.params.token.toHex()
     presale.totalSupply = event.params.totalSupply
     presale.transactionHash = event.transaction.hash.toHex()
+    presale.minter = event.transaction.from.toHex()
   }
 
   presale.save()

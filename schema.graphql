@@ -435,6 +435,166 @@ type PoolHourData @entity {
   close: BigDecimal!
 }
 
+# hourly stats tracker for pool
+type PoolMinuteData @entity {
+  # format: <pool address>-<timestamp>
+  id: ID!
+  # unix timestamp for start of hour
+  periodStartUnix: Int!
+  # pointer to pool
+  pool: Pool!
+  # in range liquidity at end of period
+  liquidity: BigInt!
+  # current price tracker at end of period
+  sqrtPrice: BigInt!
+  # price of token0 - derived from sqrtPrice
+  token0Price: BigDecimal!
+  # price of token1 - derived from sqrtPrice
+  token1Price: BigDecimal!
+  # current tick at end of period
+  tick: BigInt
+  # tvl derived in USD at end of period
+  tvlUSD: BigDecimal!
+  # volume in token0
+  volumeToken0: BigDecimal!
+  # volume in token1
+  volumeToken1: BigDecimal!
+  # volume in USD
+  volumeUSD: BigDecimal!
+  # fees in USD
+  feesUSD: BigDecimal!
+  # numebr of transactions during period
+  txCount: BigInt!
+  # opening price of token0
+  open: BigDecimal!
+  # high price of token0
+  high: BigDecimal!
+  # low price of token0
+  low: BigDecimal!
+  # close price of token0
+  close: BigDecimal!
+}
+
+# hourly stats tracker for pool
+type Pool15MinuteData @entity {
+  # format: <pool address>-<timestamp>
+  id: ID!
+  # unix timestamp for start of hour
+  periodStartUnix: Int!
+  # pointer to pool
+  pool: Pool!
+  # in range liquidity at end of period
+  liquidity: BigInt!
+  # current price tracker at end of period
+  sqrtPrice: BigInt!
+  # price of token0 - derived from sqrtPrice
+  token0Price: BigDecimal!
+  # price of token1 - derived from sqrtPrice
+  token1Price: BigDecimal!
+  # current tick at end of period
+  tick: BigInt
+  # tvl derived in USD at end of period
+  tvlUSD: BigDecimal!
+  # volume in token0
+  volumeToken0: BigDecimal!
+  # volume in token1
+  volumeToken1: BigDecimal!
+  # volume in USD
+  volumeUSD: BigDecimal!
+  # fees in USD
+  feesUSD: BigDecimal!
+  # numebr of transactions during period
+  txCount: BigInt!
+  # opening price of token0
+  open: BigDecimal!
+  # high price of token0
+  high: BigDecimal!
+  # low price of token0
+  low: BigDecimal!
+  # close price of token0
+  close: BigDecimal!
+}
+
+# hourly stats tracker for pool
+type Pool30MinuteData @entity {
+  # format: <pool address>-<timestamp>
+  id: ID!
+  # unix timestamp for start of hour
+  periodStartUnix: Int!
+  # pointer to pool
+  pool: Pool!
+  # in range liquidity at end of period
+  liquidity: BigInt!
+  # current price tracker at end of period
+  sqrtPrice: BigInt!
+  # price of token0 - derived from sqrtPrice
+  token0Price: BigDecimal!
+  # price of token1 - derived from sqrtPrice
+  token1Price: BigDecimal!
+  # current tick at end of period
+  tick: BigInt
+  # tvl derived in USD at end of period
+  tvlUSD: BigDecimal!
+  # volume in token0
+  volumeToken0: BigDecimal!
+  # volume in token1
+  volumeToken1: BigDecimal!
+  # volume in USD
+  volumeUSD: BigDecimal!
+  # fees in USD
+  feesUSD: BigDecimal!
+  # numebr of transactions during period
+  txCount: BigInt!
+  # opening price of token0
+  open: BigDecimal!
+  # high price of token0
+  high: BigDecimal!
+  # low price of token0
+  low: BigDecimal!
+  # close price of token0
+  close: BigDecimal!
+}
+
+# hourly stats tracker for pool
+type Pool4HourData @entity {
+  # format: <pool address>-<timestamp>
+  id: ID!
+  # unix timestamp for start of hour
+  periodStartUnix: Int!
+  # pointer to pool
+  pool: Pool!
+  # in range liquidity at end of period
+  liquidity: BigInt!
+  # current price tracker at end of period
+  sqrtPrice: BigInt!
+  # price of token0 - derived from sqrtPrice
+  token0Price: BigDecimal!
+  # price of token1 - derived from sqrtPrice
+  token1Price: BigDecimal!
+  # current tick at end of period
+  tick: BigInt
+  # tvl derived in USD at end of period
+  tvlUSD: BigDecimal!
+  # volume in token0
+  volumeToken0: BigDecimal!
+  # volume in token1
+  volumeToken1: BigDecimal!
+  # volume in USD
+  volumeUSD: BigDecimal!
+  # fees in USD
+  feesUSD: BigDecimal!
+  # numebr of transactions during period
+  txCount: BigInt!
+  # opening price of token0
+  open: BigDecimal!
+  # high price of token0
+  high: BigDecimal!
+  # low price of token0
+  low: BigDecimal!
+  # close price of token0
+  close: BigDecimal!
+}
+
 type TokenDayData @entity {
   # token address concatendated with date
   id: ID!
@@ -637,4 +797,114 @@ type Presale @entity {
   token: String!
   totalSupply: BigInt!
   transactionHash: String!
+  minter: String!
+}
+
+#
+# Provides information about an Ethereum account
+#
+type Account @entity {
+  " Equals to: <accountAddress>"
+  id: ID!
+
+  " Account address "
+  address: Bytes!
+
+  " Token balances that this account holds "
+  balances: [AccountBalance!]! @derivedFrom(field: "account")
+}
+
+#
+# Current token balance of a particular Ethereum account
+#
+type AccountBalance @entity {
+  " Equals to: <accountAddress>-<tokenAddress>"
+  id: ID!
+
+  " Account address "
+  account: Account!
+
+  " Token address "
+  token: Token!
+
+  " Current account balance "
+  amount: BigDecimal!
+
+  " Block number in which the balance was last modified "
+  block: BigInt
+
+  " Last modified timestamp in seconds "
+  modified: BigInt
+
+  " Hash of the last transaction that modified the balance "
+  transaction: Bytes
+}
+
+#
+# Token balance of a particular Ethereum account in a certain timestamp. This entity is used to
+# provide information about evolution of account balances
+#
+type AccountBalanceSnapshot @entity {
+  " Equals to: <accountAddress>-<tokenAddress>-<timestamp>"
+  id: ID!
+
+  " Account address "
+  account: Account!
+
+  " Token addess "
+  token: Token!
+
+  " Account balance "
+  amount: BigDecimal!
+
+  # TODO: Add description and check if could be non-optional
+  event: TokenEvent
+
+  " Block number "
+  block: BigInt!
+
+  " Timestamp in seconds "
+  timestamp: BigInt!
+
+  " Transaction hash "
+  transaction: Bytes!
+}
+
+type TransferEvent implements TokenEvent @entity {
+  id: ID!
+
+  " Token address "
+  token: Token!
+
+  " Quantity of tokens transferred "
+  amount: BigDecimal!
+
+  " Transaction sender address "
+  sender: Bytes!
+
+  " Address of source account "
+  source: Bytes!
+
+  " Address of destination account "
+  destination: Bytes!
+
+  " Block number "
+  block: BigInt!
+
+  " Event timestamp "
+  timestamp: BigInt!
+
+  " Transaction hash "
+  transaction: Bytes!
+}
+
+interface TokenEvent {
+  id: ID!
+  token: Token!
+  amount: BigDecimal!
+  sender: Bytes!
+
+  block: BigInt!
+  timestamp: BigInt!
+  transaction: Bytes!
 }
