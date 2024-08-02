@@ -78,7 +78,7 @@ export function getSubgraphConfig(): SubgraphConfig {
   // subgraph does not support case switch with strings, hence this if else block
   if (selectedNetwork == MAINNET_NETWORK_NAME) {
     return {
-      factoryAddress: '0xC26efd9dE31b581cCC4CA50aeeaF05dE70B230D7',
+      factoryAddress: '0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed',
       stablecoinWrappedNativePoolAddress: '',
       stablecoinIsToken0: false,
       wrappedNativeAddress: '0x7507c1dc16935B82698e4C63f2746A2fCf994dF8',
@@ -87,9 +87,9 @@ export function getSubgraphConfig(): SubgraphConfig {
       whitelistTokens: [],
       tokenOverrides: [
         {
-          address: Address.fromString('0xC26efd9dE31b581cCC4CA50aeeaF05dE70B230D7'),
+          address: Address.fromString('0x7507c1dc16935B82698e4C63f2746A2fCf994dF8'),
           symbol: 'WETH',
-          name: 'Wrapped Ethereum',
+          name: 'Wrapped Bera',
           decimals: BigInt.fromI32(18),
         },
       ],
