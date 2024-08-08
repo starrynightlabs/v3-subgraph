@@ -78,7 +78,7 @@ export function getSubgraphConfig(): SubgraphConfig {
   // subgraph does not support case switch with strings, hence this if else block
   if (selectedNetwork == MAINNET_NETWORK_NAME) {
     return {
-      factoryAddress: '0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed',
+      factoryAddress: '0x2803a1fDA2C6DcDaD0e046459bc5728697deb777',
       stablecoinWrappedNativePoolAddress: '',
       stablecoinIsToken0: false,
       wrappedNativeAddress: '0x7507c1dc16935B82698e4C63f2746A2fCf994dF8',

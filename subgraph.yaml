@@ -11,7 +11,7 @@ dataSources:
     name: Factory
     network: mainnet
     source:
-      address: '0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed'
+      address: '0x2803a1fDA2C6DcDaD0e046459bc5728697deb777'
       abi: Factory
       startBlock: 2290892
     mapping:
@@ -40,7 +40,7 @@ dataSources:
     name: PresaleManager
     network: mainnet
     source:
-      address: '0xdef0616Ad7fa6df292b1Ef5531D4819f60D8BD36'
+      address: '0x3b2E675485C5204818a1e40cC61DED26DB1657A6'
       abi: PresaleManager
       startBlock: 2290892
     mapping:

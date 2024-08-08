@@ -1,7 +1,7 @@
 {
   "bera-bartio": {
     "Factory": {
-      "address": "0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed",
+      "address": "0x2803a1fDA2C6DcDaD0e046459bc5728697deb777",
       "startBlock": 1543027
     }
   },
@@ -43,7 +43,7 @@
   },
   "mainnet": {
     "Factory": {
-      "address": "0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed",
+      "address": "0x2803a1fDA2C6DcDaD0e046459bc5728697deb777",
       "startBlock": 12369621
     }
   },

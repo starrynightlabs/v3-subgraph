@@ -7,7 +7,7 @@ import { Pool, Token } from '../src/types/schema'
 import { SubgraphConfig } from '../src/utils/chains'
 import { ZERO_BD, ZERO_BI } from '../src/utils/constants'
 
-const FACTORY_ADDRESS = '0xF69A21819fcf9cBFaB45B9c3b7c105d5eCF404Ed'
+const FACTORY_ADDRESS = '0x2803a1fDA2C6DcDaD0e046459bc5728697deb777'
 const USDC_MAINNET_ADDRESS = '0xd6D83aF58a19Cd14eF3CF6fe848C9A4d21e5727c'
 const WETH_MAINNET_ADDRESS = '0x7507c1dc16935B82698e4C63f2746A2fCf994dF8'
 const WBTC_MAINNET_ADDRESS = '0x286F1C3f0323dB9c91D1E8f45c8DF2d065AB5fae'
