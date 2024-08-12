@@ -1,8 +1,8 @@
 {
   "bera-bartio": {
     "Factory": {
-      "address": "0x2803a1fDA2C6DcDaD0e046459bc5728697deb777",
-      "startBlock": 1543027
+      "address": "0x16C7B570267eb3e1F9576fed90721d5Ee540DB53",
+      "startBlock": 2773443
     }
   },
   "arbitrum-one": {
@@ -43,8 +43,8 @@
   },
   "mainnet": {
     "Factory": {
-      "address": "0x2803a1fDA2C6DcDaD0e046459bc5728697deb777",
-      "startBlock": 12369621
+      "address": "0x16C7B570267eb3e1F9576fed90721d5Ee540DB53",
+      "startBlock": 2773443
     }
   },
   "matic": {
